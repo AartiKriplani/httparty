@@ -26,9 +26,9 @@ module Net
           %Q(uri="#{@path}"),
           %Q(response="#{request_digest}")]
         [%Q(cnonce="#{@cnonce}"),
-          %Q(opaque="#{@response['opaque']}"),
           %Q(qop="#{@response['qop']}"),
           %Q(nc="0")].each { |field| header << field } if qop_present?
+         header << %Q(opaque="#{@response['opaque']}") if @response.has_key?('opaque')
         header
       end
 
